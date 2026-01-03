@@ -1,0 +1,42 @@
+name: Node.js CI Pipeline
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  quality-and-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        node-version: [20.x, 22.x]
+    
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          cache: true
+      
+      - name: Install Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check lint
+        run: pnpm run lint:check
+
+      - name: Run tests
+        run: pnpm run vitest --if-exists
+
+      - name: Build
+        run: pnpm run build
