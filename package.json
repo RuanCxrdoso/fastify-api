@@ -5,16 +5,23 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch src/server.ts",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@rocketseat/eslint-config": "^2.2.2",
     "@types/node": "^25.0.3",
+    "eslint": "^9.39.2",
+    "globals": "^17.0.0",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.51.0"
   },
   "dependencies": {
     "fastify": "^5.6.2"
