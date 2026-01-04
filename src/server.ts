@@ -1,5 +1,6 @@
 import fastify from 'fastify'
 import { db } from './database.js'
+import { randomUUID } from 'node:crypto'
 
 const app = fastify()
 
@@ -7,10 +8,22 @@ app.get('/users', () => {
   return 'Hello World'
 })
 
-app.get('/hello', async () => {
-  const tables = await db('sqlite_schema').select('*')
+app.post('/transaction', async () => {
+  const transaction = await db('transactions').insert({
+    id: randomUUID(),
+    title: 'Send 650$',
+    amount: 650.00,
+  }).returning('*')
 
-  return tables
+  return transaction
+})
+
+app.get('/transaction', async () => {
+  const transaction = await db('transactions')
+    .where('amount', 50)
+    .select()
+
+  return transaction
 })
 
 app
