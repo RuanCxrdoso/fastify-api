@@ -29,3 +29,6 @@ Thumbs.db
 
 # Arquivos de Teste (se gerados automaticamente)
 coverage/
+
+# db
+tmp/app.db
