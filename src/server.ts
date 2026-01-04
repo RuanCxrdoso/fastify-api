@@ -1,6 +1,7 @@
 import fastify from 'fastify'
 import { db } from './database.js'
 import { randomUUID } from 'node:crypto'
+import { env } from './env.js'
 
 const app = fastify()
 
@@ -28,7 +29,7 @@ app.get('/transaction', async () => {
 
 app
   .listen({
-    port: 3333,
+    port: env.PORT,
   }).then(() => {
     console.log('HTTP Server is Running!')
   })
