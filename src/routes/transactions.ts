@@ -4,6 +4,24 @@ import { db } from '../database.js'
 import { z } from 'zod'
 
 export async function transactionsRoutes(app: FastifyInstance) {
+  app.get('/', async (_, res) => {
+    const transactions = await db('transactions').select()
+
+    return res.status(200).send({ transactions })
+  })
+
+  app.get('/:id', async (req, res) => {
+    const getTransactionsParamsSchema = z.object({
+      id: z.uuid(),
+    })
+
+    const { id } = getTransactionsParamsSchema.parse(req.params)
+
+    const transaction = await db('transactions').where('id', id).first()
+
+    return res.status(200).send({ transaction })
+  })
+
   app.post('/', async (req, res) => {
     const createTransactionBodySchema = z.object({
       title: z.string(),
@@ -20,11 +38,5 @@ export async function transactionsRoutes(app: FastifyInstance) {
     })
 
     return res.status(201).send()
-  })
-
-  app.get('/', async () => {
-    const transaction = await db('transactions').select('*')
-
-    return transaction
   })
 }
