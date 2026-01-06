@@ -1,30 +1,17 @@
 import fastify from 'fastify'
-import { db } from './database.js'
-import { randomUUID } from 'node:crypto'
 import { env } from './env.js'
+import { transactionsRoutes } from './routes/transactions.js'
+import cookie from '@fastify/cookie'
 
+// Instancia do fastify
 const app = fastify()
 
-app.get('/users', () => {
-  return 'Hello World'
-})
+// Pluging do fastify com suporte para cookies
+app.register(cookie)
 
-app.post('/transaction', async () => {
-  const transaction = await db('transactions').insert({
-    id: randomUUID(),
-    title: 'Send 650$',
-    amount: 650.00,
-  }).returning('*')
-
-  return transaction
-})
-
-app.get('/transaction', async () => {
-  const transaction = await db('transactions')
-    .where('amount', 50)
-    .select()
-
-  return transaction
+// 'Plugin' para conectar com as rotas, injentando o app na função das rotas
+app.register(transactionsRoutes, {
+  prefix: 'transaction',
 })
 
 app
