@@ -1,18 +1,9 @@
-import fastify from 'fastify'
+import { app } from './app.js'
 import { env } from './env.js'
-import { transactionsRoutes } from './routes/transactions.js'
-import cookie from '@fastify/cookie'
 
-// Instancia do fastify
-const app = fastify()
-
-// Pluging do fastify com suporte para cookies
-app.register(cookie)
-
-// 'Plugin' para conectar com as rotas, injentando o app na função das rotas
-app.register(transactionsRoutes, {
-  prefix: 'transaction',
-})
+// Somente o listen aqui pois tive que mover todo o código referente 
+// aos plugins para o arquivo app.ts, para poder importar a instância 
+// do fastify dentro dos testes tem que ele tente executar o servidor.
 
 app
   .listen({

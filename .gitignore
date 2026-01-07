@@ -9,6 +9,7 @@ build/
 .env
 .env.*
 !/.env.example
+!/.env.test.example
 
 # Arquivos de Configuração de IDE/Editor
 .vscode/
@@ -32,3 +33,4 @@ coverage/
 
 # db
 db/app.db
+db/test.db
