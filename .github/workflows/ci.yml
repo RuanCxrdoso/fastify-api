@@ -1,8 +1,6 @@
 name: Node.js CI Pipeline
 
 on:
-  push:
-    branches: ['main']
   pull_request:
     types: [opened, reopened, synchronize]
 
@@ -35,8 +33,8 @@ jobs:
       - name: Check lint
         run: pnpm run lint:check
 
-      # - name: Run tests
-      #   run: pnpm run tests
+      - name: Run tests
+        run: pnpm run test:run
 
       - name: Build
         run: pnpm run build
