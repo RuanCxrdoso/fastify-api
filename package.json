@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
+    "test:run": "vitest run",
     "dev": "tsx watch src/server.ts",
     "knex": "node --import tsx ./node_modules/knex/bin/cli.js",
     "build": "tsc",
@@ -19,11 +20,14 @@
     "@eslint/js": "^9.39.2",
     "@rocketseat/eslint-config": "^2.2.2",
     "@types/node": "^25.0.3",
+    "@types/supertest": "^6.0.3",
     "eslint": "^9.39.2",
     "globals": "^17.0.0",
+    "supertest": "^7.2.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.51.0"
+    "typescript-eslint": "^8.51.0",
+    "vitest": "^4.0.16"
   },
   "dependencies": {
     "@fastify/cookie": "^11.0.2",
