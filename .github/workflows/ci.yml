@@ -37,6 +37,7 @@ jobs:
         run: |
           echo "DATABASE_URL=./db/test.db" > .env.test
           echo "NODE_ENV=test" >> .env.test
+          echo "DATABASE_CLIENT=sqlite3" > env.test
 
       - name: Run tests
         run: pnpm run test:run
