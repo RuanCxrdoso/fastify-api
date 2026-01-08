@@ -8,7 +8,7 @@
     "test:run": "vitest run",
     "dev": "tsx watch src/server.ts",
     "knex": "node --import tsx ./node_modules/knex/bin/cli.js",
-    "build": "tsc",
+    "build": "tsup src --out-dir build",
     "lint:check": "eslint .",
     "lint:fix": "eslint --fix ."
   },
@@ -24,6 +24,7 @@
     "eslint": "^9.39.2",
     "globals": "^17.0.0",
     "supertest": "^7.2.2",
+    "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.51.0",
